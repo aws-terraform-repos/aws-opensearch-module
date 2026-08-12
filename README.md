@@ -1,6 +1,6 @@
-# AWS OpenSearch Terraform Module
+# AWS OpenSearch OpenTofu Module
 
-A comprehensive Terraform module for deploying and managing AWS OpenSearch domains with best practices and DRY principles.
+A comprehensive OpenTofu (Terraform-compatible) module for deploying and managing AWS OpenSearch domains with best practices and DRY principles.
 
 ## Features
 
@@ -82,7 +82,7 @@ This module includes three complete examples:
 
 | Name | Version |
 |------|---------|
-| terraform | >= 1.0 |
+| opentofu | >= 1.6 |
 | aws | >= 4.0 |
 
 ## Providers
@@ -149,7 +149,7 @@ This module uses [Task](https://taskfile.dev) for automation. Install Task and r
 # Show available tasks
 task
 
-# Format Terraform files
+# Format OpenTofu files
 task fmt
 
 # Validate module
@@ -167,7 +167,7 @@ task ci
 
 ### Available Tasks
 
-- `task fmt` - Format all Terraform files
+- `task fmt` - Format all OpenTofu files
 - `task fmt-check` - Check if all files are formatted
 - `task validate` - Validate the module
 - `task validate-examples` - Validate all example configurations
@@ -176,13 +176,13 @@ task ci
 - `task docs` - Generate documentation (requires terraform-docs)
 - `task test` - Run all tests
 - `task ci` - Run CI pipeline
-- `task clean` - Clean up Terraform files
+- `task clean` - Clean up OpenTofu files
 
 ## Development
 
 ### Prerequisites
 
-- [Terraform](https://www.terraform.io/downloads.html) >= 1.0
+- [OpenTofu](https://opentofu.org/docs/intro/install/) >= 1.6
 - [Task](https://taskfile.dev) (optional, for automation)
 - [TFLint](https://github.com/terraform-linters/tflint) (optional, for linting)
 - [tfsec](https://github.com/aquasecurity/tfsec) (optional, for security scanning)
@@ -207,7 +207,7 @@ This repository includes custom instructions for GitHub Copilot in `.github/copi
 
 Contributions are welcome! Please ensure:
 
-1. Code is formatted with `terraform fmt`
+1. Code is formatted with `tofu fmt`
 2. All tests pass (`task test`)
 3. Documentation is updated
 4. Examples are provided for new features

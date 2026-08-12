@@ -13,15 +13,15 @@ This example demonstrates deploying an OpenSearch domain within a VPC with prope
 ## Usage
 
 ```bash
-terraform init
-terraform plan
-terraform apply
+tofu init
+tofu plan
+tofu apply
 ```
 
 ## Clean Up
 
 ```bash
-terraform destroy
+tofu destroy
 ```
 
 ## Notes

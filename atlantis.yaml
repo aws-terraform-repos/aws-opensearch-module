@@ -2,3 +2,4 @@ version: 3
 projects:
   - name: aws-opensearch-module-basic
     dir: examples/basic
+    terraform_distribution: opentofu

@@ -12,15 +12,15 @@ This example demonstrates a basic OpenSearch domain configuration with minimal s
 ## Usage
 
 ```bash
-terraform init
-terraform plan
-terraform apply
+tofu init
+tofu plan
+tofu apply
 ```
 
 ## Clean Up
 
 ```bash
-terraform destroy
+tofu destroy
 ```
 
 ## Notes

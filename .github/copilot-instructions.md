@@ -1,19 +1,19 @@
-# GitHub Copilot Instructions for AWS OpenSearch Terraform Module
+# GitHub Copilot Instructions for AWS OpenSearch OpenTofu Module
 
 ## General Guidelines
 
-- Use HashiCorp Configuration Language (HCL) syntax for all Terraform configuration files
-- Follow Terraform best practices and naming conventions
+- Use HashiCorp Configuration Language (HCL) syntax for all OpenTofu configuration files
+- Follow OpenTofu/Terraform best practices and naming conventions
 - Maintain DRY (Don't Repeat Yourself) principles throughout the codebase
 - Use double quotes for all string values in HCL
 
 ## Code Structure
 
-- Organize Terraform resources logically in separate files:
+- Organize OpenTofu resources logically in separate files:
   - `main.tf`: Primary resource definitions
   - `variables.tf`: Input variable declarations
   - `outputs.tf`: Output value definitions
-  - `versions.tf`: Terraform and provider version constraints
+  - `versions.tf`: OpenTofu and provider version constraints
 - Use meaningful and descriptive names for resources, variables, and outputs
 - Group related resources together using comments when necessary
 
@@ -62,8 +62,8 @@
 ## Testing
 
 - Use Taskfile.yml for automation of common tasks
-- Validate Terraform configurations before committing
-- Format all Terraform files using `terraform fmt`
+- Validate OpenTofu configurations before committing
+- Format all OpenTofu files using `tofu fmt`
 - Test module with different configurations
 
 ## Comments

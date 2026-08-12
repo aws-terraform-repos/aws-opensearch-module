@@ -20,15 +20,15 @@ This example demonstrates a production-ready OpenSearch domain configuration wit
 **Important:** Change the `master_user_password` in `main.tf` before deploying to production!
 
 ```bash
-terraform init
-terraform plan
-terraform apply
+tofu init
+tofu plan
+tofu apply
 ```
 
 ## Clean Up
 
 ```bash
-terraform destroy
+tofu destroy
 ```
 
 ## Security Notes
