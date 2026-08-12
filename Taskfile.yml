@@ -1,0 +1,141 @@
+version: '3'
+
+vars:
+  MODULE_DIR: '.'
+  EXAMPLES_DIR: 'examples'
+
+tasks:
+  default:
+    desc: "Show available tasks"
+    cmds:
+      - task --list
+
+  fmt:
+    desc: "Format all Terraform files"
+    cmds:
+      - terraform fmt -recursive {{.MODULE_DIR}}
+    silent: false
+
+  fmt-check:
+    desc: "Check if all Terraform files are formatted"
+    cmds:
+      - terraform fmt -recursive -check {{.MODULE_DIR}}
+    silent: false
+
+  validate:
+    desc: "Validate the Terraform module"
+    dir: "{{.MODULE_DIR}}"
+    cmds:
+      - terraform init -backend=false
+      - terraform validate
+    silent: false
+
+  validate-examples:
+    desc: "Validate all example configurations"
+    cmds:
+      - task: validate-example
+        vars: { EXAMPLE: "basic" }
+      - task: validate-example
+        vars: { EXAMPLE: "vpc" }
+      - task: validate-example
+        vars: { EXAMPLE: "complete" }
+    silent: false
+
+  validate-example:
+    desc: "Validate a specific example"
+    dir: "{{.EXAMPLES_DIR}}/{{.EXAMPLE}}"
+    cmds:
+      - echo "Validating {{.EXAMPLE}} example..."
+      - terraform init -backend=false
+      - terraform validate
+    silent: false
+
+  lint:
+    desc: "Run TFLint on the module"
+    cmds:
+      - |
+        if command -v tflint >/dev/null 2>&1; then
+          tflint --init
+          tflint
+        else
+          echo "TFLint not installed. Install from https://github.com/terraform-linters/tflint"
+          exit 1
+        fi
+    silent: false
+
+  docs:
+    desc: "Generate documentation using terraform-docs"
+    cmds:
+      - |
+        if command -v terraform-docs >/dev/null 2>&1; then
+          terraform-docs markdown table --output-file README.md --output-mode inject {{.MODULE_DIR}}
+        else
+          echo "terraform-docs not installed. Install from https://github.com/terraform-docs/terraform-docs"
+          exit 1
+        fi
+    silent: false
+
+  security:
+    desc: "Run tfsec security scanner"
+    cmds:
+      - |
+        if command -v tfsec >/dev/null 2>&1; then
+          tfsec {{.MODULE_DIR}}
+        else
+          echo "tfsec not installed. Install from https://github.com/aquasecurity/tfsec"
+          exit 1
+        fi
+    silent: false
+
+  clean:
+    desc: "Clean up Terraform files and directories"
+    cmds:
+      - find {{.MODULE_DIR}} -type d -name ".terraform" -exec rm -rf {} + 2>/dev/null || true
+      - find {{.MODULE_DIR}} -type f -name ".terraform.lock.hcl" -delete 2>/dev/null || true
+      - find {{.MODULE_DIR}} -type f -name "terraform.tfstate*" -delete 2>/dev/null || true
+    silent: false
+
+  test:
+    desc: "Run all tests (format check, validation, lint)"
+    cmds:
+      - task: fmt-check
+      - task: validate
+      - task: validate-examples
+    silent: false
+
+  ci:
+    desc: "Run CI pipeline (format, validate, lint, security)"
+    cmds:
+      - task: fmt-check
+      - task: validate
+      - task: validate-examples
+      - echo "CI pipeline completed successfully!"
+    silent: false
+
+  init-example:
+    desc: "Initialize a specific example"
+    dir: "{{.EXAMPLES_DIR}}/{{.EXAMPLE}}"
+    cmds:
+      - terraform init
+    silent: false
+
+  plan-example:
+    desc: "Plan a specific example"
+    dir: "{{.EXAMPLES_DIR}}/{{.EXAMPLE}}"
+    cmds:
+      - terraform plan
+    silent: false
+
+  apply-example:
+    desc: "Apply a specific example"
+    dir: "{{.EXAMPLES_DIR}}/{{.EXAMPLE}}"
+    cmds:
+      - terraform apply
+    silent: false
+
+  destroy-example:
+    desc: "Destroy a specific example"
+    dir: "{{.EXAMPLES_DIR}}/{{.EXAMPLE}}"
+    cmds:
+      - terraform destroy
+    silent: false
