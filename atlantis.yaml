@@ -12,9 +12,6 @@ projects:
         - "*.tf"
         - "../../*.tf"
       enabled: true
-    apply_requirements:
-      - approved
-      - mergeable
 
   - name: aws-opensearch-module-complete
     dir: examples/complete
@@ -24,9 +21,6 @@ projects:
         - "*.tf"
         - "../../*.tf"
       enabled: true
-    apply_requirements:
-      - approved
-      - mergeable
 
   - name: aws-opensearch-module-vpc
     dir: examples/vpc
@@ -36,6 +30,3 @@ projects:
         - "*.tf"
         - "../../*.tf"
       enabled: true
-    apply_requirements:
-      - approved
-      - mergeable
