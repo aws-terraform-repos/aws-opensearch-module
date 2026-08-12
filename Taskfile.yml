@@ -11,23 +11,23 @@ tasks:
       - task --list
 
   fmt:
-    desc: "Format all Terraform files"
+    desc: "Format all OpenTofu files"
     cmds:
-      - terraform fmt -recursive {{.MODULE_DIR}}
+      - tofu fmt -recursive {{.MODULE_DIR}}
     silent: false
 
   fmt-check:
-    desc: "Check if all Terraform files are formatted"
+    desc: "Check if all OpenTofu files are formatted"
     cmds:
-      - terraform fmt -recursive -check {{.MODULE_DIR}}
+      - tofu fmt -recursive -check {{.MODULE_DIR}}
     silent: false
 
   validate:
-    desc: "Validate the Terraform module"
+    desc: "Validate the OpenTofu module"
     dir: "{{.MODULE_DIR}}"
     cmds:
-      - terraform init -backend=false
-      - terraform validate
+      - tofu init -backend=false
+      - tofu validate
     silent: false
 
   validate-examples:
@@ -46,8 +46,8 @@ tasks:
     dir: "{{.EXAMPLES_DIR}}/{{.EXAMPLE}}"
     cmds:
       - echo "Validating {{.EXAMPLE}} example..."
-      - terraform init -backend=false
-      - terraform validate
+      - tofu init -backend=false
+      - tofu validate
     silent: false
 
   lint:
@@ -88,7 +88,7 @@ tasks:
     silent: false
 
   clean:
-    desc: "Clean up Terraform files and directories"
+    desc: "Clean up OpenTofu files and directories"
     cmds:
       - find {{.MODULE_DIR}} -type d -name ".terraform" -exec rm -rf {} + 2>/dev/null || true
       - find {{.MODULE_DIR}} -type f -name ".terraform.lock.hcl" -delete 2>/dev/null || true
@@ -116,26 +116,26 @@ tasks:
     desc: "Initialize a specific example"
     dir: "{{.EXAMPLES_DIR}}/{{.EXAMPLE}}"
     cmds:
-      - terraform init
+      - tofu init
     silent: false
 
   plan-example:
     desc: "Plan a specific example"
     dir: "{{.EXAMPLES_DIR}}/{{.EXAMPLE}}"
     cmds:
-      - terraform plan
+      - tofu plan
     silent: false
 
   apply-example:
     desc: "Apply a specific example"
     dir: "{{.EXAMPLES_DIR}}/{{.EXAMPLE}}"
     cmds:
-      - terraform apply
+      - tofu apply
     silent: false
 
   destroy-example:
     desc: "Destroy a specific example"
     dir: "{{.EXAMPLES_DIR}}/{{.EXAMPLE}}"
     cmds:
-      - terraform destroy
+      - tofu destroy
     silent: false

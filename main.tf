@@ -38,7 +38,7 @@ resource "aws_opensearch_domain" "this" {
   domain_endpoint_options {
     enforce_https                   = var.domain_endpoint_options.enforce_https
     tls_security_policy             = var.domain_endpoint_options.tls_security_policy
-    custom_endpoint_enabled         = var.domain_endpoint_options.custom_endpoint_enabled
+    custom_endpoint_enabled         = coalesce(var.domain_endpoint_options.custom_endpoint_enabled, false)
     custom_endpoint                 = var.domain_endpoint_options.custom_endpoint
     custom_endpoint_certificate_arn = var.domain_endpoint_options.custom_endpoint_certificate_arn
   }
@@ -68,7 +68,7 @@ resource "aws_opensearch_domain" "this" {
     for_each = var.advanced_security_options != null ? [var.advanced_security_options] : []
     content {
       enabled                        = advanced_security_options.value.enabled
-      internal_user_database_enabled = advanced_security_options.value.internal_user_database_enabled
+      internal_user_database_enabled = coalesce(advanced_security_options.value.internal_user_database_enabled, false)
 
       dynamic "master_user_options" {
         for_each = advanced_security_options.value.master_user_options != null ? [advanced_security_options.value.master_user_options] : []
@@ -95,10 +95,10 @@ resource "aws_opensearch_domain" "this" {
     for_each = var.auto_tune_options != null ? [var.auto_tune_options] : []
     content {
       desired_state       = auto_tune_options.value.desired_state
-      rollback_on_disable = auto_tune_options.value.rollback_on_disable
+      rollback_on_disable = coalesce(auto_tune_options.value.rollback_on_disable, "NO_ROLLBACK")
 
       dynamic "maintenance_schedule" {
-        for_each = auto_tune_options.value.maintenance_schedule
+        for_each = coalesce(auto_tune_options.value.maintenance_schedule, [])
         content {
           start_at = maintenance_schedule.value.start_at
           duration {
