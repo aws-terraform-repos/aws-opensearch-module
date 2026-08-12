@@ -1,32 +1,5 @@
 version: 3
-automerge: false
-parallel_plan: true
-parallel_apply: true
-
 projects:
   - name: aws-opensearch-module-basic
     dir: examples/basic
-    workspace: default
-    autoplan:
-      when_modified:
-        - "*.tf"
-        - "../../*.tf"
-      enabled: true
-
-  - name: aws-opensearch-module-complete
-    dir: examples/complete
-    workspace: default
-    autoplan:
-      when_modified:
-        - "*.tf"
-        - "../../*.tf"
-      enabled: true
-
-  - name: aws-opensearch-module-vpc
-    dir: examples/vpc
-    workspace: default
-    autoplan:
-      when_modified:
-        - "*.tf"
-        - "../../*.tf"
-      enabled: true
+    terraform_version: "1.9.8"
