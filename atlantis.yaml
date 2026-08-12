@@ -7,7 +7,6 @@ projects:
   - name: aws-opensearch-module-basic
     dir: examples/basic
     workspace: default
-    terraform_version: ">= 1.0"
     autoplan:
       when_modified:
         - "*.tf"
@@ -20,7 +19,6 @@ projects:
   - name: aws-opensearch-module-complete
     dir: examples/complete
     workspace: default
-    terraform_version: ">= 1.0"
     autoplan:
       when_modified:
         - "*.tf"
@@ -33,7 +31,6 @@ projects:
   - name: aws-opensearch-module-vpc
     dir: examples/vpc
     workspace: default
-    terraform_version: ">= 1.0"
     autoplan:
       when_modified:
         - "*.tf"
