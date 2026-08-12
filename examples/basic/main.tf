@@ -2,6 +2,8 @@ provider "aws" {
   region = "us-east-1"
 }
 
+# atlantis config test - safe to remove after verifying autoplan
+
 module "opensearch" {
   source = "../.."
 
