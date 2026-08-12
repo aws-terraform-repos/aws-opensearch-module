@@ -148,7 +148,7 @@ variable "auto_tune_options" {
   description = "Configuration block for Auto-Tune options"
   type = object({
     desired_state       = string
-    rollback_on_disable = optional(string, "NO_ROLLBACK")
+    rollback_on_disable = optional(string)
     maintenance_schedule = optional(list(object({
       start_at = string
       duration = object({
@@ -156,7 +156,7 @@ variable "auto_tune_options" {
         unit  = string
       })
       cron_expression_for_recurrence = string
-    })), [])
+    })))
   })
   default = null
 }
@@ -165,7 +165,7 @@ variable "advanced_security_options" {
   description = "Configuration block for fine-grained access control"
   type = object({
     enabled                        = bool
-    internal_user_database_enabled = optional(bool, false)
+    internal_user_database_enabled = optional(bool)
     master_user_options = optional(object({
       master_user_arn      = optional(string)
       master_user_name     = optional(string)
@@ -191,7 +191,7 @@ variable "domain_endpoint_options" {
   type = object({
     enforce_https                   = bool
     tls_security_policy             = string
-    custom_endpoint_enabled         = optional(bool, false)
+    custom_endpoint_enabled         = optional(bool)
     custom_endpoint                 = optional(string)
     custom_endpoint_certificate_arn = optional(string)
   })
