@@ -1,3 +1,10 @@
+locals {
+  tags = merge(
+    var.tags,
+    var.environment != "" ? { Environment = var.environment } : {},
+  )
+}
+
 resource "aws_opensearch_domain" "this" {
   domain_name    = var.domain_name
   engine_version = var.engine_version
@@ -28,7 +35,7 @@ resource "aws_opensearch_domain" "this" {
 
   encrypt_at_rest {
     enabled    = var.encrypt_at_rest_enabled
-    kms_key_id = var.encrypt_at_rest_kms_key_id
+    kms_key_id = var.encrypt_at_rest_kms_key_arn
   }
 
   node_to_node_encryption {
@@ -114,5 +121,5 @@ resource "aws_opensearch_domain" "this" {
   advanced_options = var.advanced_options
   access_policies  = var.access_policies
 
-  tags = var.tags
+  tags = local.tags
 }
