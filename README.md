@@ -72,11 +72,10 @@ module "opensearch" {
 
 ## Examples
 
-This module includes three complete examples:
+This module includes two complete examples:
 
 - **[basic](./examples/basic/)** - Minimal configuration for development/testing
-- **[vpc](./examples/vpc/)** - VPC deployment with security groups
-- **[complete](./examples/complete/)** - Production-ready configuration with all features
+- **[advanced](./examples/advanced/)** - Production-ready VPC deployment with security groups and all features
 
 ## Requirements
 
@@ -116,7 +115,8 @@ This module includes three complete examples:
 | iops | Baseline I/O performance of EBS volumes (required for io1/io2) | `number` | `null` | no |
 | throughput | Throughput (in MiB/s) of the EBS volumes (required for gp3) | `number` | `null` | no |
 | encrypt_at_rest_enabled | Whether to enable encryption at rest | `bool` | `true` | no |
-| encrypt_at_rest_kms_key_id | KMS key ID for encryption at rest | `string` | `null` | no |
+| encrypt_at_rest_kms_key_arn | KMS key ARN for encryption at rest | `string` | `null` | no |
+| environment | Deployment environment (e.g. dev, staging, production), merged into resource tags as Environment | `string` | `""` | no |
 | node_to_node_encryption_enabled | Whether node-to-node encryption is enabled | `bool` | `true` | no |
 | vpc_options | VPC options for the OpenSearch domain | `object` | `null` | no |
 | advanced_options | Key-value map of advanced options | `map(string)` | `{}` | no |

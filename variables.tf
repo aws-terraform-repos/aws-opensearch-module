@@ -102,8 +102,8 @@ variable "encrypt_at_rest_enabled" {
   default     = true
 }
 
-variable "encrypt_at_rest_kms_key_id" {
-  description = "KMS key ID for encryption at rest"
+variable "encrypt_at_rest_kms_key_arn" {
+  description = "KMS key ARN for encryption at rest"
   type        = string
   default     = null
 }
@@ -215,4 +215,10 @@ variable "tags" {
   description = "Map of tags to assign to the resource"
   type        = map(string)
   default     = {}
+}
+
+variable "environment" {
+  description = "Deployment environment (e.g. dev, staging, production), merged into resource tags as Environment"
+  type        = string
+  default     = ""
 }

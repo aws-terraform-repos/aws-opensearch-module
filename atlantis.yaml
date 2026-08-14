@@ -2,3 +2,5 @@ version: 3
 projects:
   - name: aws-opensearch-module-basic
     dir: examples/basic
+  - name: aws-opensearch-module-advanced
+    dir: examples/advanced
